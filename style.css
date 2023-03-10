@@ -67,6 +67,13 @@ M A I N
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin: 0 auto;
+  width: 80%;
+}
+@media screen and (max-width: 526px) {
+  .wrapper {
+    width: 100%;
+  }
 }
 .wrapper div {
   padding: 0.5em;
@@ -75,7 +82,7 @@ M A I N
   color: #e4dfbf;
   margin: 1em auto 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
   flex: 0 0 62%;
@@ -84,6 +91,7 @@ M A I N
 @media screen and (max-width: 526px) {
   .wrapper .main {
     flex: 0 0 100%;
+    justify-content: center;
   }
 }
 .wrapper .main #employee, .wrapper .main #task {
@@ -148,13 +156,29 @@ M A I N
   color: #3a2533;
 }
 .wrapper .main .card {
-  flex: 0 0 30%;
+  flex: 0 0 42%;
   border: 1px solid rgba(166, 19, 117, 0.88);
   background: rgba(58, 37, 51, 0.4);
   padding: 0;
+  margin: 0.5em 0;
+  border-radius: 8px 8px 8px 8px;
 }
 .wrapper .main .card .card-header {
   background: #3a2533;
+  position: relative;
+  border-radius: 8px 8px 0 0;
+}
+.wrapper .main .card .card-header .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: 700;
+  margin: 3px;
+  cursor: pointer;
+}
+.wrapper .main .card .card-header .close:hover, .wrapper .main .card .card-header .close:focus, .wrapper .main .card .card-header .close:active {
+  color: rgba(166, 19, 117, 0.9);
+  transition: 0.3s ease;
 }
 .wrapper .main .card h5 {
   text-transform: uppercase;
@@ -164,6 +188,21 @@ M A I N
   .wrapper .main .card {
     flex: 0 0 48%;
   }
+}
+.wrapper .main .card .card-body {
+  display: flex;
+}
+.wrapper .main .card .card-body .settings {
+  flex: 0 0 5%;
+  padding: 0;
+  justify-content: center;
+}
+.wrapper .main .card .card-body .settings span {
+  padding: 10px 0;
+}
+.wrapper .main .card .card-body .settings span:hover, .wrapper .main .card .card-body .settings span:focus, .wrapper .main .card .card-body .settings span:active {
+  color: #3a2533;
+  transition: 0.3s ease;
 }
 .wrapper aside {
   flex: 0 0 34%;

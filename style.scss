@@ -61,6 +61,11 @@ M A I N
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin: 0 auto;
+    width: 80%;
+    @media screen and (max-width:526px) {
+        width: 100%;
+    }
     div {
         padding: 0.5em;
     }
@@ -68,12 +73,13 @@ M A I N
         color: $font-light;
         margin: 1em auto 0;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: flex-start;
         flex-wrap: wrap;
         flex: 0 0 62%;
         @media screen and (max-width:526px) {
             flex: 0 0 100%;
+            justify-content: center;
         }
         border: 1px solid $border-dark;
         #employee, #task {
@@ -136,12 +142,28 @@ M A I N
             color: $font-dark;
         }
         .card {
-            flex: 0 0 30%;
+            flex: 0 0 42%;
             border: 1px solid $border-dark;
             background: rgba($font-dark, .4);
             padding: 0;
+            margin: .5em 0;
+            border-radius: 8px 8px 8px 8px;
             .card-header {
                 background: $font-dark;
+                position: relative;
+                border-radius: 8px 8px 0 0;
+                .close {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    font-weight: 700;
+                    margin: 3px;
+                    cursor: pointer;
+                    &:hover, &:focus, &:active {
+                        color: rgba($base-color, .9);
+                        transition: .3s ease;
+                    }
+                }
             }
             h5 {
                 text-transform: uppercase;
@@ -149,6 +171,21 @@ M A I N
             }
             @media screen and (max-width:526px) {
                 flex: 0 0 48%;
+            }
+            .card-body {
+                display: flex;
+                .settings {
+                    flex: 0 0 5%;
+                    padding: 0;
+                    justify-content: center;
+                    span {
+                        padding: 10px 0;
+                        &:hover, &:focus, &:active {
+                            color: $font-dark;
+                            transition: .3s ease;
+                        }
+                    }
+                }
             }
         }
     }
