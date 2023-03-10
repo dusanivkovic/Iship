@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Employee And Task</title>
+</head>
+<body>
+    <section class="header-section">
+        <header>
+            <div class="logo">Employee And Task</div>
+        </header>
+    </section>
+    <section class="wrapper">
+        <div class="main">
+            <div id="employee">
+                <h2>Add employee</h2>
+                <span><i class="fas fa-user-plus"></i></span>
+            </div>
+            <div id="task">
+                <h2>Add task</h2>
+                <span><i class="fas fa-plus"></i></span>
+            </div>
+            <div id="modal-employee" class="modal">
+                <div class="modal-content">
+                    <span>Name</span><br><input type="text" class="name">
+                    <span>E-mail</span><br><input type="email" class="mail">
+                    <span>Phone</span><br><input type="tel" class="phone">
+                    <span>Date of birth</span><br><input type="date" class="birth">
+                    <span>Salery</span><input type="text" class="salery">
+                    <button class="btn">Add</button>
+                </div>
+            </div>
+            <div id="modal-task" class="modal">
+                <div class="modal-content">
+                    <span>Title</span><br><input type="text" class="task-title">
+                    <span>Description</span><br><input type="text" class="task-description">
+                    <span>Assignee</span><br><input type="text" class="assignee">
+                    <button class="btn">Add</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5>Employee</h5>
+                </div>
+                <div class="card-body">
+                    <p><span>Name:</span></p>
+                    <p><span>E-mail:</span></p>
+                    <p><span>Phone:</span></p>
+                    <p><span>Date of birth:</span></p>
+                    <p><span>Salery:</span></p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5>Task</h5>
+                </div>
+                <div class="card-body">
+                    <p><span>Title:</span></p>
+                    <p><span>Description:</span></p>
+                    <p><span>Assignee:</span></p>
+                </div>
+            </div>
+        </div>
+        <aside>
+            <div class="five-largest">
+                <h4>Largest number of task</h4>
+                <p class="list-name"><span>Name:</span>Slavko Ivkovic</p>
+            </div>
+        </aside>    
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

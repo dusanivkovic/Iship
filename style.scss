@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap');
+@import '_var.scss';
+:root {
+    font-family: $font-body;
+    font-family: $font-logo;
+    font-size: 16px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/****************************
+G l o b a l
+****************************/
+img {
+    width: 100%;
+}
+body {
+    position: relative;
+}
+button {
+    padding: 5px 25px;
+    border-radius: 12px;
+    background: $font-dark;
+    color: $font-light;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    transition-duration: 0.3s;
+    transition-property: box-shadow;
+    &:hover, &:focus, &:active {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+}
+input {
+    margin: .5em 0 .5em .5em;
+    padding: 5px;
+    display: block;
+}
+/****************************
+H E A D E R
+****************************/
+header {
+    background-color: $base-color;
+    width: 100%;
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
+    padding: 30px 0;
+    transition-duration: 0.6s;
+    color: $font-light;
+    .logo {
+        margin-left: .5em;
+    }
+}
+/****************************
+M A I N
+****************************/
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    div {
+        padding: 0.5em;
+    }
+    .main {
+        color: $font-light;
+        margin: 1em auto 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        flex: 0 0 62%;
+        @media screen and (max-width:526px) {
+            flex: 0 0 100%;
+        }
+        border: 1px solid $border-dark;
+        #employee, #task {
+            cursor: pointer;
+            box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.45);
+            display: inline-block;
+            vertical-align: middle;
+            flex: 0 0 42%;
+            background: $base-color;
+            margin-bottom: 1em;
+            text-align: center;
+            @media screen and (max-width:526px) {
+               flex: 0 0 94%; 
+               justify-content: center;
+            }
+            transform: perspective(1px) translateZ(0);
+            transition-duration: 0.3s;
+            transition-property: transform;
+            &:hover, &:focus, &:active {
+                transform: scale(1.1);
+                box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            }
+        }
+        .modal {
+            position: fixed;
+            display: none;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            color: $font-light;
+            min-height: 200px;
+            background: rgba($font-dark, .4);
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto; /* 15% from the top and centered */
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%; 
+                text-align: left;
+                .close {
+                    color: #aaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                    top: 0;
+                    right: 0;
+                    &:hover, &:focus {
+                      color: black;
+                      text-decoration: none;
+                      cursor: pointer;
+                    }
+                }
+            }
+        }
+        i {
+            font-size: 2rem;
+            color: $font-dark;
+        }
+        .card {
+            flex: 0 0 30%;
+            border: 1px solid $border-dark;
+            background: rgba($font-dark, .4);
+            padding: 0;
+            .card-header {
+                background: $font-dark;
+            }
+            h5 {
+                text-transform: uppercase;
+                text-align: center;
+            }
+            @media screen and (max-width:526px) {
+                flex: 0 0 48%;
+            }
+        }
+    }
+    aside {
+        flex: 0 0 34%;
+        color: $font-dark;
+        background: $font-light;
+        @media screen and (max-width:526px) {
+            flex: 0 0 100%;
+        }
+        margin-top: 1em;
+        border: 1px solid $border-dark;
+        span {
+            font-weight: 700;
+            margin-right: 5px;
+        }
+    }
+}
