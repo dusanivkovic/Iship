@@ -103,43 +103,14 @@ M A I N
                 box-shadow: 0 0 1px rgba(0, 0, 0, 0);
             }
         }
-        .modal {
-            position: fixed;
-            display: none;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            color: $font-light;
-            min-height: 200px;
-            background: rgba($font-dark, .4);
-            .modal-content {
-                background-color: #fefefe;
-                margin: 15% auto; /* 15% from the top and centered */
-                padding: 20px;
-                border: 1px solid #888;
-                width: 80%; 
-                text-align: left;
-                .close {
-                    color: #aaa;
-                    float: right;
-                    font-size: 28px;
-                    font-weight: bold;
-                    top: 0;
-                    right: 0;
-                    &:hover, &:focus {
-                      color: black;
-                      text-decoration: none;
-                      cursor: pointer;
-                    }
-                }
-            }
-        }
         i {
             font-size: 2rem;
             color: $font-dark;
+        }
+        .card-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 5px;
         }
         .card {
             flex: 0 0 42%;
@@ -201,6 +172,43 @@ M A I N
         span {
             font-weight: 700;
             margin-right: 5px;
+        }
+    }
+}
+/****************************
+M O D A L
+****************************/
+.modal {
+    position: fixed;
+    display: none;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    color: $font-light;
+    min-height: 200px;
+    background: rgba($font-dark, .4);
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; 
+        text-align: left;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            top: 0;
+            right: 0;
+            &:hover, &:focus {
+              color: black;
+              text-decoration: none;
+              cursor: pointer;
+            }
         }
     }
 }
