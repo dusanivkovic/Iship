@@ -43,17 +43,26 @@ input {
 /****************************
 H E A D E R
 ****************************/
-header {
-    background-color: $base-color;
+.header-section {
+    position: fixed;
     width: 100%;
-    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
-    padding: 30px 0;
-    transition-duration: 0.6s;
-    color: $font-light;
-    .logo {
-        margin-left: .5em;
+    z-index: 5;
+    header {
+        background-color: $base-color;
+        width: 100%;
+        box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.75);
+        padding: 30px 0;
+        transition-duration: 0.6s;
+        color: $font-light;
+        height: 45vh;
+        display: flex;
+        align-items: flex-end;
+        .logo {
+            margin-left: .5em;
+        }
     }
 }
+
 /****************************
 M A I N
 ****************************/
@@ -63,6 +72,8 @@ M A I N
     flex-wrap: wrap;
     margin: 0 auto;
     width: 80%;
+    position: relative;
+    top: 50vh;
     @media screen and (max-width:526px) {
         width: 100%;
     }
@@ -77,6 +88,7 @@ M A I N
         align-items: flex-start;
         flex-wrap: wrap;
         flex: 0 0 62%;
+        column-gap: 10px;
         @media screen and (max-width:526px) {
             flex: 0 0 100%;
             justify-content: center;
@@ -137,17 +149,18 @@ M A I N
                 }
             }
         }
-        i {
+        .add {
             font-size: 2rem;
             color: $font-dark;
         }
         .card {
-            flex: 0 0 42%;
+            flex: 1 0 42%;
             border: 1px solid $border-dark;
             background: rgba($font-dark, .4);
             padding: 0;
             margin: .5em 0;
             border-radius: 8px 8px 8px 8px;
+            display: none;
             .card-header {
                 background: $font-dark;
                 position: relative;
@@ -170,7 +183,7 @@ M A I N
                 text-align: center;
             }
             @media screen and (max-width:526px) {
-                flex: 0 0 48%;
+                flex: 1 0 48%;
             }
             .card-body {
                 display: flex;
@@ -180,6 +193,7 @@ M A I N
                     justify-content: center;
                     span {
                         padding: 10px 0;
+                        font-size: .8rem!important;
                         &:hover, &:focus, &:active {
                             color: $font-dark;
                             transition: .3s ease;
@@ -187,6 +201,10 @@ M A I N
                     }
                 }
             }
+        }
+        .show-card {
+            display: flex;
+            flex-direction: column;
         }
     }
     aside {

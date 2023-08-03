@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Employee And Task</title>
 </head>
 <body>
@@ -18,58 +18,43 @@
         <div class="main">
             <div id="employee">
                 <h3>Add employee</h3>
-                <span><i class="fas fa-user-plus"></i></span>
+                <span><i class="add fas fa-user-plus"></i></span>
             </div>
             <div id="task">
                 <h3>Add task</h3>
-                <span><i class="fas fa-plus"></i></span>
+                <span><i class="add fas fa-plus"></i></span>
             </div>
             <div id="modal-employee" class="modal">
                 <div class="modal-content">
-                    <span>Name</span><br><input type="text" class="name">
-                    <span>E-mail</span><br><input type="email" class="mail">
-                    <span>Phone</span><br><input type="tel" class="phone">
-                    <span>Date of birth</span><br><input type="date" class="birth">
-                    <span>Salery</span><input type="text" class="salery">
-                    <button id="createEmployee" class="btn">Create</button>
+                    <form action="">
+                        <label for="">Name</label>
+                        <input type="text" class="name">
+                        <label for="">E-mail</label>
+                        <input type="email" class="mail">
+                        <label for="">Phone</label>
+                        <input type="tel" class="phone">
+                        <label for="">Date of birth</label>
+                        <input type="date" class="birth">
+                        <label for="">Salery</label>
+                        <input type="text" class="salery">
+                        <button id="createEmployee" class="btn">Create</button>
+                    </form>
                 </div>
             </div>
             <div id="modal-task" class="modal">
                 <div class="modal-content">
-                    <span>Title</span><br><input type="text" class="task-title">
-                    <span>Description</span><br><input type="text" class="task-description">
-                    <span>Assignee</span><br><input type="text" class="assignee">
-                    <button id="createTask" class="btn">Create</button>
+                    <form action="">
+                        <label for="">Title</label>
+                        <input type="text" class="task-title">
+                        <label for="">Description</label>
+                        <input type="text" class="task-description">
+                        <label for="">Assignee</label>
+                        <input type="text" class="assignee">
+                        <button id="createTask" class="btn">Create</button>
+                    </form>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header">
-                    <h5>Employee</h5>
-                    <span class="close">X</span>
-                </div>
-                <div class="card-body">
-                    <div class="settings">
-                        <span class="fas fa-user-edit"></span>
-                    </div>
-                    <div class="card-content">
-                        <p><span>Name:</span></p>
-                        <p><span>E-mail:</span></p>
-                        <p><span>Phone:</span></p>
-                        <p><span>Date of birth:</span></p>
-                        <p><span>Salery:</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h5>Task</h5>
-                </div>
-                <div class="card-body">
-                    <p><span>Title:</span></p>
-                    <p><span>Description:</span></p>
-                    <p><span>Assignee:</span></p>
-                </div>
-            </div>
+
         </div>
         <aside>
             <div class="five-largest">
