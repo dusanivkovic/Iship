@@ -16,6 +16,7 @@ const btnCreateEmployee = document.querySelector('#createEmployee');
 const btnCreateTask = document.querySelector('#createTask');
 const mainDiv = document.querySelector('.main');
 const modal = document.querySelectorAll('.modal');
+const formModal = document.querySelectorAll('form');
 const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 const employees = JSON.parse(localStorage.getItem('employees')) || [];
 
@@ -52,12 +53,14 @@ btnCreateTask.addEventListener('click', (e) => {
 });// Create card of task or save change 
 
 function saveChangeOrCreateCard (evt, modalContent) {
-    evt.target.textContent == 'Create' ? createCard(modalContent) : alert('Are you sure to save changes');
+    evt.target.textContent == 'Create' ? createCard(modalContent) : evt.target.textContent == 'Save' ? console.log('update') : alert('!!!');
+    formModal.forEach(form => form.reset());
 }
 
 let t = tasks.length == 0 ? 0 : tasks.length;
 let emp = employees.length == 0 ? 0 : employees.length;
 let i = t + emp;// set ID for array employees or tasks
+
 function createCard (role) {
     const card = document.createElement('div');
     const cardHeader = document.createElement('div');
@@ -77,7 +80,8 @@ function createCard (role) {
     card.append(cardHeader, cardBody);
     role == 'employee' ? getDataFromModalEmployee (cardBody, content, card) : role == 'task' ? getDataFromModalTask (cardBody, content, card): alert('!!!');
     document.querySelector('.main').appendChild(card);
-    formModal.forEach(form => form.reset());
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem('employees', JSON.stringify(employees));
     i++;
 }// append HTML element width content and execution getDataFromModal function
 
@@ -86,7 +90,7 @@ function getDataFromModalTask (body, contents, cards) {
     const taskDescription = document.querySelector('.task-description');
     const taskAssigniee = document.querySelector('.assignee');
     contents.setAttribute('class', 'card-content');
-    contents.innerHTML = `<p><strong>Title: </strong>${taskTitle.value}</p><p><strong>Description: </strong>${taskDescription.value}</p><p><strong>Assignieee: </strong>${taskAssigniee.value}</p>`;
+    contents.innerHTML = `<p id ='titleTask'><strong>Title: </strong>${taskTitle.value}</p><p id ='descriptionTask'><strong>Description: </strong>${taskDescription.value}</p><p id ='assigneeTask'><strong>Assignee: </strong>${taskAssigniee.value}</p>`;
     body.appendChild(contents);
     const task = {
         title: taskTitle.value,
@@ -95,8 +99,8 @@ function getDataFromModalTask (body, contents, cards) {
         id: cards.getAttribute('data-index')
     };
     tasks.push(task);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
 }// getting data from modal task and store in array tasks
+
 function getDataFromModalEmployee (body, contents, cards) {
     const employeeName = document.querySelector('.name');
     const employeeMail = document.querySelector('.mail');
@@ -115,23 +119,25 @@ function getDataFromModalEmployee (body, contents, cards) {
         id: cards.getAttribute('data-index')
     };
     employees.push(employee);
-    localStorage.setItem('employees', JSON.stringify(employees));
+    // localStorage.setItem('employees', JSON.stringify(employees));
 }// getting data from modal employee and store in array employee
 
 function closeCard () {
     mainDiv.addEventListener('click', (e) => {
         const parentCard = e.target.closest('.card');
         if (e.target.classList == 'close') {
-            const getIdElementForDelete = parentCard.getAttribute('data-index');
-            let spliceIndex = employees.findIndex(emp => emp.id == getIdElementForDelete);
-            spliceIndex = spliceIndex == -1 ? tasks.findIndex(tsk => tsk.id == getIdElementForDelete) : spliceIndex;
             const arrForUpdate = parentCard.querySelector('h5').textContent;
-            console.log(spliceIndex, arrForUpdate)
             parentCard.classList.remove('show-card');
-            deleteArrElement (spliceIndex, arrForUpdate);
+            deleteArrElement (getIndexOfElement (parentCard, tasks), arrForUpdate);
         }
     })
 }// remove card from main tag and execute function for delete array element
+
+const getIndexOfElement = (parent, arr) => {
+    const dataIndx = parent.getAttribute('data-index');
+    let indexArr = arr.findIndex(ar => ar.id == dataIndx);
+    return indexArr;
+}
 
 function deleteArrElement (index, arr) {
     if (arr == 'employee') {
@@ -146,16 +152,124 @@ function deleteArrElement (index, arr) {
 
 function updateCard () {
     mainDiv.addEventListener('click', (e) => {
-        if (e.target.parentElement.classList ==('settings task-edit'))  {
+        if (e.target.classList == 'fas fa-user-edit')  {
+            const parentCard = e.target.closest('.card');
             btnCreateTask.textContent = 'Save';
-            openModal (modalTask);
-        }
-        if (e.target.parentElement.classList ==('settings employee-edit'))  {
             btnCreateEmployee.textContent = 'Save';
-            openModal (modalEmployee);
+            if (e.target.parentElement.classList == 'settings task-edit') {
+                openModal (modalTask);
+                let indexOfTaskElement = getIndexOfElement (parentCard, tasks);
+                parentCard.setAttribute('id', 'updating');
+                modalTask.querySelector('.task-title').value = tasks[indexOfTaskElement].title;
+                modalTask.querySelector('.task-description').value = tasks[indexOfTaskElement].description;
+                modalTask.querySelector('.assignee').value = tasks[indexOfTaskElement].assiggnie;
+                modalTask.querySelectorAll('input').forEach(inpt => {
+                    inpt.addEventListener('change', (e) =>  {
+                        if (inpt.classList.contains('task-title') && parentCard.getAttribute('id') == 'updating') {
+                            tasks[indexOfTaskElement].title = e.target.value;
+                            parentCard.querySelector('#titleTask').innerHTML = `<p><strong>Title: </strong>${tasks[indexOfTaskElement].title}</p>`;
+                            localStorage.setItem('tasks', JSON.stringify(tasks));
+                        }
+                        if (inpt.classList.contains('task-description') && parentCard.getAttribute('id') == 'updating') {
+                            tasks[indexOfTaskElement].description = e.target.value;
+                            parentCard.querySelector('#descriptionTask').innerHTML = `<p><strong>Description: </strong>${tasks[indexOfTaskElement].description}</p>`;
+                            localStorage.setItem('tasks', JSON.stringify(tasks));
+                        }
+                        if (inpt.classList.contains('assignee') && parentCard.getAttribute('id') == 'updating') {
+                            tasks[indexOfTaskElement].assiggnie = e.target.value;
+                            parentCard.querySelector('#assigneeTask').innerHTML = `<p><strong>Assiggnee: </strong>${tasks[indexOfTaskElement].assiggnie}</p>`;
+                            localStorage.setItem('tasks', JSON.stringify(tasks));
+                        }
+                    });
+                    btnCreateTask.addEventListener('click', () => {
+                        parentCard.removeAttribute('id');
+                    });
+                })
+            }
+            if (e.target.parentElement.classList == 'settings employee-edit') {
+                openModal(modalEmployee);
+                const allCardParagraf = parentCard.querySelectorAll('p');
+                let indexOfEmpolyeeElement = getIndexOfElement (parentCard, employees);
+                parentCard.setAttribute('id', 'updating');
+                modalEmployee.querySelector('.name').value = employees[indexOfEmpolyeeElement].name;
+                modalEmployee.querySelector('.mail').value = employees[indexOfEmpolyeeElement].mail;
+                modalEmployee.querySelector('.phone').value = employees[indexOfEmpolyeeElement].phone;
+                modalEmployee.querySelector('.birth').value = employees[indexOfEmpolyeeElement].birth;
+                modalEmployee.querySelector('.salery').value = employees[indexOfEmpolyeeElement].salery;
+                modalEmployee.querySelectorAll('input').forEach(inpt => {
+                    inpt.addEventListener('change', (e) => {
+                        if (inpt.classList.contains('name') && parentCard.getAttribute('id') == 'updating') {
+                            employees[indexOfEmpolyeeElement].name = e.target.value;
+                            allCardParagraf[0].innerHTML = `<p><strong>Name: </strong>${employees[indexOfEmpolyeeElement].name}</p>`;
+                            localStorage.setItem('employees', JSON.stringify(employees));
+                        }
+                        if (inpt.classList.contains('mail') && parentCard.getAttribute('id') == 'updating') {
+                            employees[indexOfEmpolyeeElement].mail = e.target.value;
+                            allCardParagraf[1].innerHTML = `<p><strong>Mail: </strong>${employees[indexOfEmpolyeeElement].mail}</p>`;
+                            localStorage.setItem('employees', JSON.stringify(employees));
+                        }
+                        if (inpt.classList.contains('phone') && parentCard.getAttribute('id') == 'updating') {
+                            employees[indexOfEmpolyeeElement].phone = e.target.value;
+                            allCardParagraf[2].innerHTML = `<p><strong>Phone: </strong>${employees[indexOfEmpolyeeElement].phone}</p>`;
+                            localStorage.setItem('employees', JSON.stringify(employees));
+                        }
+                        if (inpt.classList.contains('birth') && parentCard.getAttribute('id') == 'updating') {
+                            employees[indexOfEmpolyeeElement].birth = e.target.value;
+                            allCardParagraf[3].innerHTML = `<p><strong>Date of birth: </strong>${employees[indexOfEmpolyeeElement].birth}</p>`;
+                            localStorage.setItem('employees', JSON.stringify(employees));
+                        }
+                        if (inpt.classList.contains('salery') && parentCard.getAttribute('id') == 'updating') {
+                            employees[indexOfEmpolyeeElement].salery = e.target.value;
+                            allCardParagraf[4].innerHTML = `<p><strong>Salery: </strong>${employees[indexOfEmpolyeeElement].salery}</p>`;
+                            localStorage.setItem('employees', JSON.stringify(employees));
+                        }
+                    });
+                    btnCreateEmployee.addEventListener('click', () => {
+                        parentCard.removeAttribute('id');
+                    });
+                })
+            }
+
         }
     })
+
 }// open modal window for update employee or task
+
+// find top five assigned employee
+let getFive = () => {
+    let duplicateArr = [], sortArr = [];
+    tasks.forEach( item => {
+        if (item.assiggnie != '') {
+            duplicateArr.push([item.assiggnie]);
+        }
+        console.log(duplicateArr)
+    })
+    sortArr = duplicateArr.reduce((accumulator, value) => {
+        return {...accumulator, [value]: (accumulator[value] || 0) + 1};
+    }, {});
+    // return sortArr;
+    return Object.entries(sortArr).sort((a,b) => b[1]-a[1]);
+}
+console.log(getFive())
+showAssign();
+
+function showAssign () {
+    const topList = document.querySelector('.list-name');
+    topList.innerHTML = '';
+    const topArr = getFive();
+    console.log(topArr)
+    console.log(tasks)
+    for (let i = 0; i < 5; i++) {
+        const li = document.createElement('li');
+        const span = document.createElement('span');
+        // span.innerText =`${topArr[i][1]}`;
+        // li.append(span);
+        li.innerHTML += `Name: ${(topArr[i])}`;
+        topList.append(li);
+    }
+}
+
+
 closeCard ();
 updateCard ();
 console.table(tasks)
