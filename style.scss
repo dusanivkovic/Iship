@@ -216,6 +216,15 @@ M A I N
         }
         margin-top: 1em;
         border: 1px solid $border-dark;
+        ul {
+            list-style: none;
+            li {
+                width: 100%;
+            }
+            .top-five {
+                float: right;
+            }
+        }
         span {
             font-weight: 700;
             margin-right: 5px;

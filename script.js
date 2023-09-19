@@ -45,11 +45,13 @@ btnCreateEmployee.addEventListener('click', (e) => {
     e.preventDefault();
     modalEmployee.style.display = 'none';
     saveChangeOrCreateCard (e, 'employee');
+    showAssign();
 });// Create card of employee or save change 
 btnCreateTask.addEventListener('click', (e) => {
     e.preventDefault();
     modalTask.style.display = 'none';
     saveChangeOrCreateCard (e, 'task');
+    showAssign();
 });// Create card of task or save change 
 
 function saveChangeOrCreateCard (evt, modalContent) {
@@ -183,6 +185,7 @@ function updateCard () {
                     });
                     btnCreateTask.addEventListener('click', () => {
                         parentCard.removeAttribute('id');
+                        showAssign();
                     });
                 })
             }
@@ -226,6 +229,7 @@ function updateCard () {
                     });
                     btnCreateEmployee.addEventListener('click', () => {
                         parentCard.removeAttribute('id');
+                        showAssign();
                     });
                 })
             }
@@ -256,25 +260,31 @@ showAssign();
 function showAssign () {
     const topList = document.querySelector('.list-name');
     topList.innerHTML = '';
-    const topArr = getFive();
-    console.log(topArr)
-    console.log(tasks)
-    for (let i = 0; i < 5; i++) {
-        const li = document.createElement('li');
-        const span = document.createElement('span');
-        // span.innerText =`${topArr[i][1]}`;
-        // li.append(span);
-        li.innerHTML += `Name: ${(topArr[i])}`;
-        topList.append(li);
+    const topArr = {... getFive()};
+    for (let i = 0; i < Object.keys(topArr).length; i++) {
+        if (i < 5) {
+            const li = document.createElement('li');
+            const span = document.createElement('span');
+            li.innerHTML += `Name: ${(topArr[i][0])}<span class='top-five'>${topArr[i][1]}</span>`;
+            topList.append(li);
+        }
     }
 }
 
 
 closeCard ();
 updateCard ();
-console.table(tasks)
-console.table(employees)
-// localStorage.clear();
+document.querySelector('.reset').addEventListener('click', () => {
+    localStorage.clear();
+    mainDiv.querySelectorAll('.card').forEach(card => card.remove());
+    while (document.querySelector('.list-name').hasChildNodes()) {
+        document.querySelector('.list-name').removeChild(document.querySelector('.list-name').firstChild)
+    }
+    location.reload();
+    delete tasks;
+    showAssign();
+})
+// ;
 
 
 

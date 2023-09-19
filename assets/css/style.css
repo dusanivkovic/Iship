@@ -234,6 +234,15 @@ M A I N
     flex: 0 0 100%;
   }
 }
+.wrapper aside ul {
+  list-style: none;
+}
+.wrapper aside ul li {
+  width: 100%;
+}
+.wrapper aside ul .top-five {
+  float: right;
+}
 .wrapper aside span {
   font-weight: 700;
   margin-right: 5px;
